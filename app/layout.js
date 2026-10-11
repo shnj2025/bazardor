@@ -25,6 +25,7 @@ export default function RootLayout({ children }) {
     <html
        lang="bn"
       data-theme="light"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
    <body className="min-h-full flex flex-col bg-gray-50">
