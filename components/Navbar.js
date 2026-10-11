@@ -1,3 +1,6 @@
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import UserMenu from "./UserMenu";
 import Link from "next/link";
 import { getCategories } from "@/lib/api";
 import { todayBn } from "@/lib/format";
@@ -5,6 +8,8 @@ import CategoryLinks from "./CategoryLinks";
 
 export default async function Navbar() {
   const categories = await getCategories();
+  const session = await auth.api.getSession({ headers: await headers() });
+  const user = session?.user;
 
   return (
     <header className="bg-white border-b border-gray-200">
@@ -19,17 +24,23 @@ export default async function Navbar() {
           </div>
         </Link>
 
-        <div className="flex items-center gap-2">
-          <Link href="/signin" className="btn btn-ghost btn-sm sm:btn-md">
-            সাইন ইন
-          </Link>
-          <Link
-            href="/signup"
-            className="btn btn-success text-white btn-sm sm:btn-md"
-          >
-            সাইন আপ
-          </Link>
-        </div>
+        {user ? (
+          <UserMenu
+            user={{ name: user.name, email: user.email, image: user.image }}
+          />
+        ) : (
+          <div className="flex items-center gap-2">
+            <Link href="/signin" className="btn btn-ghost btn-sm sm:btn-md">
+              সাইন ইন
+            </Link>
+            <Link
+              href="/signup"
+              className="btn btn-success text-white btn-sm sm:btn-md"
+            >
+              সাইন আপ
+            </Link>
+          </div>
+        )}
       </div>
 
       <CategoryLinks categories={categories} />
