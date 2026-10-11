@@ -1,5 +1,8 @@
-"use client";
 
+
+"use client";
+import { Suspense } from "react";
+import RedirectToast from "@/components/RedirectToast";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -45,6 +48,9 @@ export default function SignUpPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-10">
+      <Suspense fallback={null}>
+        <RedirectToast />
+      </Suspense>
       <div className="text-center mb-6">
         <h1 className="text-2xl font-bold">অ্যাকাউন্ট তৈরি করুন</h1>
         <p className="text-sm text-gray-500">
