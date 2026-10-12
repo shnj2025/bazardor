@@ -15,10 +15,19 @@ export default function SocialButtons() {
   return (
     <div>
       <div className="divider text-xs text-gray-500">অথবা</div>
+
+      <button
+        type="button"
+        onClick={() => handleSocial("google")}
+        className="btn btn-outline w-full"
+      >
+        Google দিয়ে চালিয়ে যান
+      </button>
+
       <button
         type="button"
         onClick={() => handleSocial("github")}
-        className="btn btn-outline w-full"
+        className="btn btn-outline w-full mt-2"
       >
         GitHub দিয়ে চালিয়ে যান
       </button>
